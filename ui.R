@@ -140,6 +140,15 @@ ui <- navbarPage(
                  "Wingard is the director most frequently seen in this dataset.")
                  
              )
-           ))
+           )
+           )
+  )
+  tabPanel("Interactive Page 1"),
+  fluidPage(
+    mainPanel(
+    )
+    
+  )
+  
   
 )
