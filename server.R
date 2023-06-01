@@ -1,4 +1,4 @@
-movies_df <- read.csv("IMDB-Movie-Data.csv")
+movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPKQNASMGNVNIYOMW34ZDY5FBQ")
 
 library(dplyr)
 library(ggplot2)

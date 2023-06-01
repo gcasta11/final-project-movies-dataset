@@ -1,4 +1,4 @@
-movies_df <- read.csv("IMDB-Movie-Data.csv")
+movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPKQNASMGNVNIYOMW34ZDY5FBQ")
 
 library(shiny)
 library(bslib)
@@ -197,7 +197,7 @@ ui <- navbarPage(
           "highest average IMDB movie rating is 2007 while the lowest is 2016. ",
           "Next, we found that Thrillers are the most highly ranked genre. ",
           "We also noticed that Adam Wingard is the director that is most ",
-          "frequently seen in this dataset. ")
+          "frequently seen in this dataset. "),
          h1("Analysis Discussion"),
         p("Interpreting the results and contextualizing the conclusions of",
           "a data analysis requires a familiarity with the dataset. In this",
