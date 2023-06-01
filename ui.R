@@ -3,7 +3,18 @@ movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-pr
 library(shiny)
 library(bslib)
 
+my_theme <- bs_theme(bg = "#fcf9dc",
+                     fg = "#120800",
+                     primary = "#a89f99"
+                     )
+#my_theme <- bs_theme_update(my_theme, bootswatch = "cerulean")
+
+#bs_add_rules(sass::sass_file("style.scss"))
+
 ui <- navbarPage(
+  theme = my_theme,
+  
+  
   title = "Exploring IMDb HollyWood Movies from 2006 to 2016",
   id = "nav",
   tabPanel("Introduction",
@@ -19,7 +30,7 @@ ui <- navbarPage(
        " plays a major role in today's media data. Now that more and more people are ",
        "having access to content on the internet, it is important to take ",
        "notice of which movies are being preferred, rated, and consistently ",
-       "viewed. We are hoping to answer some main questions. First, What is the average
+       "viewed. We are hoping to answer some main questions: First, What is the average
        movie ratings per year? Second, Is there a relationship between the runtime (in minutes)
        and the movie ratings?, Third, What genres are most frequent?"),
        br(),
@@ -29,7 +40,7 @@ ui <- navbarPage(
        "we will continue to monitor genre, revenue, actors, and metascore, ",
        "in order to accurately assess whether the most popular and highly ",
        "ranked movies are made by the same director, as well as the same actors."),
-       h2("The Dataset"),
+       h3("The Dataset"),
        p("This dataset displays 1000 of the most popular movies on ",
          "IMDB in the years 2006-2016.The data was posted and created by PromtCloud and was collected ",
          "from the IMDB website. PromptCloud is a web data crawling and ",
@@ -48,7 +59,7 @@ ui <- navbarPage(
          "Furthermore, the Revenue and Metascore columns include some NA values. ",
          "However, even with these limitations, it is an interesting ",
          "and fitting data set to be utilized for this project."),
-       h2("Implications"),
+       h4("Implications"),
        p("This dataset does not include all Hollywood movies made ",
          "from 2006 to 2016. With this in mind, we cannot accurately ",
          "conclude if the summary statistics, found above, actually apply ",
@@ -62,7 +73,7 @@ ui <- navbarPage(
          "and least rated Hollywood movies and genres. This will also make ",
          "it difficult to draw connections based on the year, genre, and ",
          "ranking for each observation found in this dataset."),
-       h2("Limitations & Challenges"),
+       h4("Limitations & Challenges"),
        p("With any dataset, it can be difficult to interpret data ",
          "without actually collecting it. When we analyze data sets as ",
          "strangers, we are not aware of possible biases that were used and ",
@@ -77,7 +88,7 @@ ui <- navbarPage(
          "probability of finding gender bias in the audience of certain movies ",
          "and in certain genres since the data set does not encompass ",
          "all movies made from 2006 to 2016."),
-       h2("Related Work"),
+       h4("Related Work"),
        p("According to 'IMDb Announces Top 10 Movies and Series of 2022' ",
          "from Business Wire, IMDb is the most popular website for ",
          "information about movies, shows, and celebrities. IMDb ",
@@ -139,6 +150,11 @@ ui <- navbarPage(
   ),
   tabPanel("Runtime vs. Ratings",
     fluidPage(
+      h1("Runtime of the Highest Ranked Movies"),
+      p("The graph below displays runtime of the highest ranked movies in the IMDb 
+      dataset from 2006 to 2016. With this graph, we are able to observe a positive 
+      relationship between the highest ranked Hollywood movies, and movies with 
+      longer runtime, in minutes."),
       sidebarLayout(
         sidebarPanel(
           sliderInput("movie_runtime", "Select Runtime: ",
@@ -150,7 +166,6 @@ ui <- navbarPage(
                      ),
         ),
         mainPanel(
-         h1("Runtime of the Highest Ranked Movies"),
          plotlyOutput(outputId = "plot_2")
         )
       )
@@ -158,6 +173,11 @@ ui <- navbarPage(
   ),
   tabPanel("Genres",
     fluidPage(
+      h1("Most Loved Genres of Hollywood Movies, 2006-2016"),
+      p("This graph shows how often genres show up in movies found on IMDB from 
+        2006-2016. This will tell us what types of movies coming out of Hollywood 
+        are the most popular. There is not much diversity regarding genres as most 
+        Hollywood movies are Action, drama, or comedy movies. "),
      sidebarLayout(
        sidebarPanel(
          sliderInput("frequency_threshold", "Frequency Threshold: ",
@@ -166,7 +186,6 @@ ui <- navbarPage(
          actionButton("update_button", "Update Plot")
        ),
        mainPanel(
-         h1("Most Loved Genres of Hollywood Movies, 2006-2016"),
          plotlyOutput(outputId = "plot_3")
        )
      )
@@ -188,3 +207,4 @@ ui <- navbarPage(
       )
   )
 )
+
