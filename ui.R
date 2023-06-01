@@ -147,13 +147,14 @@ ui <- navbarPage(
   tabPanel("Interactive Page 1",
     fluidPage(
       mainPanel(
+        h1("Average IMDB Movie Ratings from 2006-2016"),
         sliderInput("movie_year",
                     "Year:",
                     value = c(min(movies_df$Year), max(movies_df$Year)),
                     min = min(movies_df$Year),
                     max = max(movies_df$Year),
                     step = 1),
-        plotlyOutput(outputId = "plot")
+        plotlyOutput(outputId = "plot_1")
       )
     )
   )
