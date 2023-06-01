@@ -120,15 +120,6 @@ ui <- navbarPage(
                  "probability of finding gender bias in the audience of certain movies ",
                  "and in certain genres since the data set does not encompass ",
                  "all movies made from 2006 to 2016."),
-                 h2("Summary Information"),
-                 p("First, we found that the highest-rated movie is _The ",
-                 "Dark Knight_, while _Disaster Movie_ is the lowest-rated movie ",
-                 "on IMDB from 2006-2016. Interestingly, both of those movies were ",
-                 "released in 2008. Next, we discovered that the year with the ",
-                 "highest average IMDB movie rating is 2007 while the lowest is 2016. ",
-                 "Next, we found that Thrillers are the most highly ranked genre. ",
-                 "We also noticed that Adam Wingard is the director that is most ",
-                 "frequently seen in this dataset. "),
                  h2("Table"),
                  p("The table below includes 57 observations, and 7 features. ",
                  "These features are the title of the film, the genre, the ",
@@ -157,5 +148,48 @@ ui <- navbarPage(
         plotlyOutput(outputId = "plot_1")
       )
     )
+  )
+  tabPanel("Interactive Page 2",
+           fluidPage(
+             sidebarLayout(
+               sidebarPanel(
+                 sliderInput("movie_runtime", "Select Runtime: "),
+                 min = min(movies_df$Runtime..Minutes.),
+                 max = max(movies_df$Runtime..Minutes.),
+                 value = c(min(movies_df$Runtime..Minutes.), max(movies_df$Runtime..Minutes.)))
+               actionButton("update_button", "Update Plot")
+                 
+             ),
+             mainPanel(
+               h1("Runtime of the Highest Ranked Movies "),
+               plotlyOutput("runtime_plotly")
+               
+             )
+           )
+  
+  ),
+  tabPanel("Interactive Page 3",
+           fluidPage(
+             mainPanel(
+               h1("Most Loved Genres of Hollywood Movies, 2006-2016"),
+               
+               
+             )
+           )
+  )
+  tabPanel("Conclusion",
+           fluidPage(
+             mainPanel(
+               h1("Summary Takeaways"),
+               p("First, we found that the highest-rated movie is _The ",
+                 "Dark Knight_, while _Disaster Movie_ is the lowest-rated movie ",
+                 "on IMDB from 2006-2016. Interestingly, both of those movies were ",
+                 "released in 2008. Next, we discovered that the year with the ",
+                 "highest average IMDB movie rating is 2007 while the lowest is 2016. ",
+                 "Next, we found that Thrillers are the most highly ranked genre. ",
+                 "We also noticed that Adam Wingard is the director that is most ",
+                 "frequently seen in this dataset. ")
+             )
+           )
   )
 )
