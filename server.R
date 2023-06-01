@@ -1,8 +1,8 @@
-<<<<<<< HEAD
-movies_df <- read.csv("Downloads/info_201_code/IMDB-Movie-Data.csv")
-=======
-movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLV63FDXVDEPAEXRWIZDYKOLQ")
->>>>>>> 9d9f5c4906efe8b5bcb344eadb5a4a08d260aaf4
+
+movies_df <- read.csv("/Users/gabbylopez/Downloads/info_201_code/final-project-ayudha00/IMDB-Movie-Data.csv")
+
+#movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLV63FDXVDEPAEXRWIZDYKOLQ")
+
 
 library(dplyr)
 library(ggplot2)
@@ -17,6 +17,19 @@ avg_rating <- movies_df %>%
 max_rating <- movies_df %>% 
   group_by(Runtime..Minutes.) %>% 
   summarise(max_rating = max(Rating, na.rm = TRUE))
+
+# Calculate the frequency of each genre
+genre_frequency <- movies_df %>% 
+  count(Genre)
+
+# Seperate each genre
+separated_genres <- genre_frequency %>% 
+  separate(Genre, into = c("genre1"), sep = "\\,")
+
+# Calculate the unique genres
+unique_genres <- separated_genres %>% 
+  group_by(genre1) %>% 
+  summarise(frequency = sum(n))
 
 server <- function(input, output){
   output$plot_1 <- renderPlotly({
@@ -44,6 +57,23 @@ server <- function(input, output){
     runtime_plotly <- ggplotly(runtime_plot, tooltip = "y")
     
     return(runtime_plotly)
+  })
+  
+  output$plot <- renderPlotly({
+    filtered_data <- unique_genres %>% 
+      filter(frequency >= input$frequency_threshold)
+    
+    filtered_plot <- ggplot(data = filtered_data) +
+      geom_col(mapping = aes(x = reorder(genre1, -frequency), y = frequency, fill = genre1)) +
+      labs (title = "How Often Genres Show Up in IMDb Movies 2006-2016",
+            x = "Genre",
+            y = "Frequency") +
+      theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+      scale_y_continuous(breaks = seq(0, max(unique_genres$frequency), 50))
+    
+    genres_plotly <- ggplotly(filtered_plot, tooltip = "y")
+    
+    return(genres_plotly)
   })
   
 }

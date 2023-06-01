@@ -1,4 +1,4 @@
-movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLV63FDXVDEPAEXRWIZDYKOLQ")
+movies_df <- read.csv("/Users/gabbylopez/Downloads/info_201_code/final-project-ayudha00/IMDB-Movie-Data.csv")
 
 library(shiny)
 ui <- navbarPage(
@@ -133,7 +133,7 @@ ui <- navbarPage(
                  "Wingard is the director most frequently seen in this dataset.")
              )
            )
-         )
+         
   ),
   tabPanel("Average Ratings",
     fluidPage(
@@ -159,7 +159,7 @@ ui <- navbarPage(
         )
       )
     )
-  )
+  ),
   tabPanel("Interactive Page 2",
            fluidPage(
              sidebarLayout(
@@ -174,19 +174,28 @@ ui <- navbarPage(
              mainPanel(
                h1("Runtime of the Highest Ranked Movies "),
                plotlyOutput("runtime_plotly")
-               
+             
              )
            )
   
   ),
   tabPanel("Interactive Page 3",
            fluidPage(
+             sidebarLayout(
+               sidebarPanel(
+                 sliderInput("frequency_threshold", "Frequency Threshold: ",
+                             min = 0, max = max(unique_genres$frequency),
+                             value = 50),
+                 actionButton("update_button", "Update Plot")
+               ),
              mainPanel(
                h1("Most Loved Genres of Hollywood Movies, 2006-2016"),
-               
-               
+               plotlyOutput("plot")
+             
+             
              )
            )
+           
   )
   tabPanel("Conclusion",
            fluidPage(
