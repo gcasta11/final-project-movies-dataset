@@ -71,7 +71,8 @@ ui <- navbarPage(
                    "Wire, 12 Dec. 2022, ",
                    "https://www.businesswire.com/news/home/20221212005134/en/IMDb-Announces-Top-10-Movies-and-Series-of-2022."),
                  h2("The Dataset"),
-                 p("This data set displays 1000 of the most popular movies on ",
+                 #add link
+                 p("This dataset, IMDb data from 2006 to 2016, displays 1000 of the most popular movies on ",
                  "IMDB in the years 2006-2016. We found the data set on Kaggle ",
                  "(link to the data set: ",
                  "https://www.kaggle.com/datasets/PromptCloudHQ/imdb-data). The ",
@@ -131,7 +132,8 @@ ui <- navbarPage(
                  "connection between the popularity of the movie, its director, ",
                  "and the most highly ranked genre. We can observe that the most ",
                  "highly ranked genre is the Thriller category, and Adam ",
-                 "Wingard is the director most frequently seen in this dataset.")
+                 "Wingard is the director most frequently seen in this dataset."),
+                 img("imdb_pig.jpeg")
              )
            )
          )
