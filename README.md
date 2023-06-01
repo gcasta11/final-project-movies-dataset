@@ -17,4 +17,15 @@ Media continues to play an active role in the development and evolution of socie
 
 
 # Conclusion / Summary Takeaways
+## Summary of Data Analysis
+First, we found that the highest-rated movie is _The Dark Knight_, while _Disaster Movie_ is the lowest-rated movie on IMDB from 2006-2016. Interestingly, both of those movies were released in 2008. Next, we discovered that the year with the highest average IMDB movie rating is 2007 while the lowest is 2016. Next, we found that Thrillers are the most highly ranked genre. We also noticed that Adam Wingard is the director that is most frequently seen in this dataset.
+
+## Analysis Discussion
+Interpreting the results and contextualizing the conclusions of a data analysis requires a familiarity with the dataset. In this case that means understanding the part that the IMDB website plays in the wider cinematic landscape. The IMDB ratings are user generated and are subject to the usual forces that influence all kinds of internet reviews. Since users must search up a specific movie on the internet they are much more likely to leave a review on a movie they have strong feelings (positive or negative) for, compared to a movie they thought was "just okay". This trend toward very positive and very negative reviews can be seen almost everywhere on the internet, and it is certainly something will affect any analysis of IMDB movie ratings. Another factor in a movie's placement is the number of reviews and the amount of traffic an IMDB movie page receives. Movies with broad appeal and a less restrictive age rating will be seen and reviewed by a larger audience, which could in turn impact the genre frequencies we look at with our analysis.
+
+## Broader Implications
+Cinema is a form of art that often reflects the values of the society which produces it. Often movies are used by their creators to shine a light on a particular aspect of our society, or on a specific character and their place in the world. Because movies are a from of art—with the usual subjectivity accompanying creative pursuits—it is difficult to rate them with a purely numeric scale. Though our group looked at many facets of the data in the set, like genre, actors and directors, year of release, in addition to ratings, it is still very difficult to draw conclusions about gender bias. For example, if a particular male director appears in the dataset numerous times, is that due to gender biases in the way we produce and consume cinema, or is that simply an artist being rewarded with more opportunity as a result of their previous success?
+
+
+
 
