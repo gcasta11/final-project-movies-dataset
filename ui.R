@@ -1,10 +1,11 @@
-movies_df <- read.csv("/Users/gabbylopez/Downloads/info_201_code/final-project-ayudha00/IMDB-Movie-Data.csv")
+# movies_df <- read.csv("/Users/gabbylopez/Downloads/info_201_code/final-project-ayudha00/IMDB-Movie-Data.csv")
+movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPKVF3TLXGZCZ3WUY34ZDYXWOQ")
 
 library(shiny)
 ui <- navbarPage(
   title = "Exploring IMDb HollyWood Movies from 2006 to 2016",
   id = "nav",
-  tabPanel("Introductory Page",
+  tabPanel("Introduction",
            fluidPage(
              mainPanel(
                h1("Introduction"),
@@ -28,7 +29,7 @@ ui <- navbarPage(
                "actors. We are hoping to answer questions regarding the most ",
                "frequently seen actors, directors, and genres, as well as their ",
                "correlation to ranking and runtime in the dataset."),
-               h2("Abstract"),
+               br(),
                p("By using an IMDb dataset containing Hollywood movies from 2006 ",
                "to 2016, we are hoping to answer questions regarding what genre ",
                "is most popular among the dataset, and how this correlates to ",
@@ -133,7 +134,7 @@ ui <- navbarPage(
                  "Wingard is the director most frequently seen in this dataset.")
              )
            )
-         
+         )
   ),
   tabPanel("Average Ratings",
     fluidPage(
@@ -153,63 +154,61 @@ ui <- navbarPage(
                       min = min(movies_df$Year),
                       max = max(movies_df$Year),
                       step = 1),
-        ),
+          ),
         mainPanel(
           plotlyOutput(outputId = "plot_1")
         )
       )
     )
   ),
-  tabPanel("Interactive Page 2",
-           fluidPage(
-             sidebarLayout(
-               sidebarPanel(
-                 sliderInput("movie_runtime", "Select Runtime: "),
-                 min = min(movies_df$Runtime..Minutes.),
-                 max = max(movies_df$Runtime..Minutes.),
-                 value = c(min(movies_df$Runtime..Minutes.), max(movies_df$Runtime..Minutes.)))
-               actionButton("update_button", "Update Plot")
-                 
-             ),
-             mainPanel(
-               h1("Runtime of the Highest Ranked Movies "),
-               plotlyOutput("runtime_plotly")
-             
-             )
-           )
-  
+  tabPanel("Runtime vs. Ratings",
+    fluidPage(
+      sidebarLayout(
+        sidebarPanel(
+          sliderInput("movie_runtime", "Select Runtime: ",
+          min = min(movies_df$Runtime..Minutes.),
+          max = max(movies_df$Runtime..Minutes.),
+          value = c(min(movies_df$Runtime..Minutes.), max(movies_df$Runtime..Minutes.))
+          ),
+        actionButton("update_button", "Update Plot"
+                     ),
+        ),
+        mainPanel(
+         h1("Runtime of the Highest Ranked Movies"),
+         plotlyOutput(outputId = "plot_2")
+        )
+      )
+    )
   ),
-  tabPanel("Interactive Page 3",
-           fluidPage(
-             sidebarLayout(
-               sidebarPanel(
-                 sliderInput("frequency_threshold", "Frequency Threshold: ",
-                             min = 0, max = max(unique_genres$frequency),
-                             value = 50),
-                 actionButton("update_button", "Update Plot")
-               ),
-             mainPanel(
-               h1("Most Loved Genres of Hollywood Movies, 2006-2016"),
-               plotlyOutput("plot")
-             
-             
-             )
-           )
-           
-  )
+  tabPanel("Genres",
+    fluidPage(
+     sidebarLayout(
+       sidebarPanel(
+         sliderInput("frequency_threshold", "Frequency Threshold: ",
+                     min = 0, max = max(unique_genres$frequency),
+                     value = 50),
+         actionButton("update_button", "Update Plot")
+       ),
+       mainPanel(
+         h1("Most Loved Genres of Hollywood Movies, 2006-2016"),
+         plotlyOutput(outputId = "plot_3")
+       )
+     )
+    )
+  ),
   tabPanel("Conclusion",
-           fluidPage(
-             mainPanel(
-               h1("Summary Takeaways"),
-               p("First, we found that the highest-rated movie is _The ",
-                 "Dark Knight_, while _Disaster Movie_ is the lowest-rated movie ",
-                 "on IMDB from 2006-2016. Interestingly, both of those movies were ",
-                 "released in 2008. Next, we discovered that the year with the ",
-                 "highest average IMDB movie rating is 2007 while the lowest is 2016. ",
-                 "Next, we found that Thrillers are the most highly ranked genre. ",
-                 "We also noticed that Adam Wingard is the director that is most ",
-                 "frequently seen in this dataset. ")
-             )
-           )
+    fluidPage(
+      mainPanel(
+        h1("Summary Takeaways"),
+        p("First, we found that the highest-rated movie is _The ",
+          "Dark Knight_, while _Disaster Movie_ is the lowest-rated movie ",
+          "on IMDB from 2006-2016. Interestingly, both of those movies were ",
+          "released in 2008. Next, we discovered that the year with the ",
+          "highest average IMDB movie rating is 2007 while the lowest is 2016. ",
+          "Next, we found that Thrillers are the most highly ranked genre. ",
+          "We also noticed that Adam Wingard is the director that is most ",
+          "frequently seen in this dataset. ")
+        )
+      )
   )
 )

@@ -1,12 +1,13 @@
 
-movies_df <- read.csv("/Users/gabbylopez/Downloads/info_201_code/final-project-ayudha00/IMDB-Movie-Data.csv")
+#movies_df <- read.csv("/Users/gabbylopez/Downloads/info_201_code/final-project-ayudha00/IMDB-Movie-Data.csv")
 
-#movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLV63FDXVDEPAEXRWIZDYKOLQ")
+movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPKVF3TLXGZCZ3WUY34ZDYXWOQ")
 
 
 library(dplyr)
 library(ggplot2)
 library(plotly)
+library(tidyr)
 
 # Average movie rating per year
 avg_rating <- movies_df %>% 
@@ -33,7 +34,6 @@ unique_genres <- separated_genres %>%
 
 server <- function(input, output){
   output$plot_1 <- renderPlotly({
-    # line graph
     avg_rating_plot <- ggplot(data = avg_rating) +
       geom_line(mapping = aes(x = Year,
                               y = avg_rating)) +
@@ -45,7 +45,7 @@ server <- function(input, output){
     
     return(avg_rating_plotly)
   })
-  output$plot <- renderPlotly({
+  output$plot_2 <- renderPlotly({
     filtered_data <- movies_df %>% 
       filter(Runtime..Minutes.>= input$movie_runtime[1] & Runtime..Minutes. <= input$movie_runtime[2])
     runtime_plot <- ggplot(data = filtered_data) +
@@ -58,8 +58,7 @@ server <- function(input, output){
     
     return(runtime_plotly)
   })
-  
-  output$plot <- renderPlotly({
+  output$plot_3 <- renderPlotly({
     filtered_data <- unique_genres %>% 
       filter(frequency >= input$frequency_threshold)
     
@@ -75,5 +74,5 @@ server <- function(input, output){
     
     return(genres_plotly)
   })
-  
 }
+
