@@ -7,14 +7,9 @@ my_theme <- bs_theme(bg = "#fcf9dc",
                      fg = "#120800",
                      primary = "#a89f99"
                      )
-#my_theme <- bs_theme_update(my_theme, bootswatch = "cerulean")
-
-#bs_add_rules(sass::sass_file("style.scss"))
 
 ui <- navbarPage(
   theme = my_theme,
-  
-  
   title = "Exploring IMDb HollyWood Movies from 2006 to 2016",
   id = "nav",
   tabPanel("Introduction",
@@ -207,4 +202,3 @@ ui <- navbarPage(
       )
   )
 )
-
