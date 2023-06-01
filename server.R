@@ -1,4 +1,4 @@
-movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/exploratory-analysis-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLZDDCEALPSFWLNT5SZDYGEDQ")
+movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLV63FDXVDEPAEXRWIZDYKOLQ")
 
 library(dplyr)
 library(ggplot2)
@@ -16,7 +16,7 @@ server <- function(input, output){
     avg_rating_plot <- ggplot(data = avg_rating) +
       geom_line(mapping = aes(x = Year,
                               y = avg_rating)) +
-      coord_cartesian(xlim=input$movie_year)
+      coord_cartesian(xlim=input$movie_year) +
       labs(title = "Average IMDB Movie Ratings from 2006-2016", x = "Year", 
            y = "Average Rating")
     

@@ -1,5 +1,5 @@
-movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/exploratory-analysis-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLZDDCEALPSFWLNT5SZDYGEDQ")
-  
+movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLV63FDXVDEPAEXRWIZDYKOLQ")
+
 library(shiny)
 ui <- navbarPage(
   title = "Exploring IMDb HollyWood Movies from 2006 to 2016",
@@ -144,17 +144,28 @@ ui <- navbarPage(
            )
          )
   ),
-  tabPanel("Interactive Page 1",
+  tabPanel("Average Ratings",
     fluidPage(
-      mainPanel(
-        h1("Average IMDB Movie Ratings from 2006-2016"),
-        sliderInput("movie_year",
-                    "Year:",
-                    value = c(min(movies_df$Year), max(movies_df$Year)),
-                    min = min(movies_df$Year),
-                    max = max(movies_df$Year),
-                    step = 1),
-        plotlyOutput(outputId = "plot_1")
+      h1("Average IMDB Movie Ratings over Time"),
+      p("This line graph below displays how the average rating of IMDB movies change 
+            over time from 2006-2016. The plot shows that 2007 is the year with the highest 
+            average movie rating while 2016 is the year with the lowest average movie 
+            rating. We can observe that as the year increases, the average IMDB movie ratings
+            decreases. In other words, there is a negative relationship between the year and
+            the average rating of IMDB movies. Feel free to use the slider tool below to 
+            get a closer look between years!"),
+      sidebarLayout(
+        sidebarPanel(
+          sliderInput("movie_year",
+                      "Year:",
+                      value = c(min(movies_df$Year), max(movies_df$Year)),
+                      min = min(movies_df$Year),
+                      max = max(movies_df$Year),
+                      step = 1),
+        ),
+        mainPanel(
+          plotlyOutput(outputId = "plot_1")
+        )
       )
     )
   )
