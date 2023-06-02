@@ -6,7 +6,8 @@ library(bslib)
 my_theme <- bs_theme(bg = "#fcf9dc",
                      fg = "#120800",
                      primary = "#a89f99"
-                     )
+                     ) %>% 
+  bs_add_rules(sass::sass_file("/style.scss"))
 
 ui <- navbarPage(
   theme = my_theme,
