@@ -1,4 +1,4 @@
-movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPKQNASMGNVNIYOMW34ZDY5FBQ")
+movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPKYFKBZWLHYOIQEAAIZDZOAAQ")
 
 library(dplyr)
 library(ggplot2)
@@ -27,6 +27,27 @@ separated_genres <- genre_frequency %>%
 unique_genres <- separated_genres %>% 
   group_by(genre1) %>% 
   summarise(frequency = sum(n))
+
+# Additional Analyses
+# What is the highest-rated movie in the dataset?
+highest_rated_movie <- movies_df %>% 
+  filter(Rating == max(Rating, na.rm = TRUE)) %>% 
+  pull(Title)
+
+# What year was the highest-rated movie released?
+max_rating_year <- movies_df %>% 
+  filter(Rating == max(Rating, na.rm = TRUE)) %>% 
+  pull(Year)
+
+# What is the lowest rated movie in the dataset?
+lowest_rated_movie <- movies_df %>% 
+  filter(Rating == min(Rating, na.rm = TRUE)) %>% 
+  pull(Title)
+
+# What year was the lowest-rated movie released?
+min_rating_year <- movies_df %>% 
+  filter(Rating == min(Rating, na.rm = TRUE)) %>% 
+  pull(Year)
 
 server <- function(input, output){
   output$plot_1 <- renderPlotly({

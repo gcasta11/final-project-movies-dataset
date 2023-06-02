@@ -1,4 +1,4 @@
-movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPKQNASMGNVNIYOMW34ZDY5FBQ")
+movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPKYFKBZWLHYOIQEAAIZDZOAAQ")
 
 library(shiny)
 library(bslib)
@@ -25,9 +25,10 @@ ui <- navbarPage(
        " plays a major role in today's media data. Now that more and more people are ",
        "having access to content on the internet, it is important to take ",
        "notice of which movies are being preferred, rated, and consistently ",
-       "viewed. We are hoping to answer some main questions: First, What is the average
-       movie ratings per year? Second, Is there a relationship between the runtime (in minutes)
-       and the movie ratings?, Third, What genres are most frequent?"),
+       "viewed. We are hoping to answer some main questions: 1) What is the average
+       movie ratings per year? What years have the highest and lowest average? 2) Is 
+       there a relationship between the runtime (in minutes)
+       and the movie ratings?, 3) What genres are the most frequently shown?"),
        br(),
        p("Our team analyzed the dataset,",
        tags$a(href="https://www.kaggle.com/datasets/PromptCloudHQ/imdb-data)", em("IMDB Data drom 2006 to 2016,")),
@@ -190,14 +191,29 @@ ui <- navbarPage(
     fluidPage(
       mainPanel(
         h1("Summary Takeaways"),
-        p("First, we found that the highest-rated movie is _The ",
-          "Dark Knight_, while _Disaster Movie_ is the lowest-rated movie ",
-          "on IMDB from 2006-2016. Interestingly, both of those movies were ",
-          "released in 2008. Next, we discovered that the year with the ",
-          "highest average IMDB movie rating is 2007 while the lowest is 2016. ",
-          "Next, we found that Thrillers are the most highly ranked genre. ",
-          "We also noticed that Adam Wingard is the director that is most ",
-          "frequently seen in this dataset. "),
+        p("After our analysis, we are able to answer our three main questions. 
+        Our first graph shows the average IMDB movie ratings per year, answering 
+        our ", strong("first question."), "The year with the highest average movie 
+        rating is 2007 while 2016 is the year with the lowest. There seems to be a 
+        negative relationship between the year and average movie ratings. We 
+        thought this was an interesting finding because some would expect the 
+        opposite. You would think that more recent movies have more technology 
+        to work with. Our second graph shows that there is a positive relationship 
+        between the movie runtime in minutes and the movie ratings. This answers 
+        our ", strong("second question."), "The trend displays that the longer a 
+        movie is, the higher the ratings are generally. This was also surprising 
+        to us considering that longer movies could really be dragging. However, 
+        it could be that more money and effort is put into a movie that has a 
+        longer runtime in minutes. Lastly, our third graph shows that Action movies are the 
+        most frequent and the most popular movie genre, while romance is the 
+        least popular. This answers our", strong("third question."), "The action 
+        movie genre is on the data set with a frequency of 293, following Drama 
+        with 193, and comedy with 175. It makes sense that action is a very 
+        frequent movie genre as it seems like it is also the most talked about 
+        usually. Furthermore, our analysis shows that the highest-rated movie 
+        is", em("The Dark Knight"), " while the lowest-rated movie is", em("The 
+        Disaster Movie"), "Interestingly, both of those movies were released 
+        in the year 2008."),
          h1("Analysis Discussion"),
         p("Interpreting the results and contextualizing the conclusions of",
           "a data analysis requires a familiarity with the dataset. In this",
