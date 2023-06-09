@@ -1,39 +1,42 @@
-
-#movies_df <- read.csv("/Users/gabbylopez/Downloads/info_201_code/final-project-ayudha00/IMDB-Movie-Data.csv")
-
-movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLLTGV562XER54CEFUZDY3VGA")
-
-
 library(dplyr)
 library(ggplot2)
 library(plotly)
-library(tidyr)
+library(shiny)
+library(tidyverse)
 
-# Average movie rating per year
-avg_rating <- movies_df %>% 
-  group_by(Year) %>% 
-  summarise(avg_rating = mean(Rating, na.rm = TRUE))
-
-# Maximum movie rating 
-max_rating <- movies_df %>% 
-  group_by(Runtime..Minutes.) %>% 
-  summarise(max_rating = max(Rating, na.rm = TRUE))
-
-# Calculate the frequency of each genre
-genre_frequency <- movies_df %>% 
-  count(Genre)
-
-# Seperate each genre
-separated_genres <- genre_frequency %>% 
-  separate(Genre, into = c("genre1"), sep = "\\,")
-
-# Calculate the unique genres
-unique_genres <- separated_genres %>% 
-  group_by(genre1) %>% 
-  summarise(frequency = sum(n))
 
 server <- function(input, output){
+  movies_df <- read.csv("IMDB-Movie-Data.csv")
+  
+  # Calculate the frequency of each genre
+  genre_frequency <- movies_df %>% 
+    count(Genre)
+  
+  # Seperate each genre
+  separated_genres <- genre_frequency %>% 
+    separate(Genre, into = c("genre1"), sep = "\\,")
+  
+  unique_genres <- separated_genres %>% 
+    group_by(genre1) %>% 
+    summarise(frequency = sum(n))
+  
+  filtered_data <- reactive ({
+    unique_genres %>% 
+    filter(frequency >= input$frequency_threshold)
+})
+  
+  # Average movie rating per year
+  avg_rating <- movies_df %>% 
+    group_by(Year) %>% 
+    summarise(avg_rating = mean(Rating, na.rm = TRUE))
+  
+  # Maximum movie rating 
+  max_rating <- movies_df %>% 
+    group_by(Runtime..Minutes.) %>% 
+    summarise(max_rating = max(Rating, na.rm = TRUE))
+  
   output$plot_1 <- renderPlotly({
+    # line graph
     avg_rating_plot <- ggplot(data = avg_rating) +
       geom_line(mapping = aes(x = Year,
                               y = avg_rating)) +
@@ -58,9 +61,13 @@ server <- function(input, output){
     
     return(runtime_plotly)
   })
+  
   output$plot_3 <- renderPlotly({
-    filtered_data <- unique_genres %>% 
-      filter(frequency >= input$frequency_threshold)
+    unique_genres <- separated_genres %>% 
+      group_by(genre1) %>% 
+      summarise(frequency = sum(n))
+    
+    filtered_data <- filtered_data()
     
     filtered_plot <- ggplot(data = filtered_data) +
       geom_col(mapping = aes(x = reorder(genre1, -frequency), y = frequency, fill = genre1)) +
@@ -74,5 +81,5 @@ server <- function(input, output){
     
     return(genres_plotly)
   })
+  
 }
-

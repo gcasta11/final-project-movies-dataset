@@ -1,7 +1,36 @@
-movies_df <- read.csv("https://raw.githubusercontent.com/info-201b-sp23/final-project-ayudha00/main/IMDB-Movie-Data.csv?token=GHSAT0AAAAAACAWKOPLLTGV562XER54CEFUZDY3VGA")
-
 library(shiny)
 library(bslib)
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(tidyverse)
+
+movies_df <- read.csv("IMDB-Movie-Data.csv")
+
+# Calculate the frequency of each genre
+genre_frequency <- movies_df %>% 
+  count(Genre)
+
+# Seperate each genre
+separated_genres <- genre_frequency %>% 
+  separate(Genre, into = c("genre1"), sep = "\\,")
+
+unique_genres <- separated_genres %>% 
+  group_by(genre1) %>% 
+  summarise(frequency = sum(n))
+
+
+
+# Average movie rating per year
+avg_rating <- movies_df %>% 
+  group_by(Year) %>% 
+  summarise(avg_rating = mean(Rating, na.rm = TRUE))
+
+# Maximum movie rating 
+max_rating <- movies_df %>% 
+  group_by(Runtime..Minutes.) %>% 
+  summarise(max_rating = max(Rating, na.rm = TRUE))
+
 
 my_theme <- bs_theme(bg = "#fcf9dc",
                      fg = "#120800",
@@ -202,7 +231,7 @@ ui <- navbarPage(
           "highest average IMDB movie rating is 2007 while the lowest is 2016. ",
           "Next, we found that Thrillers are the most highly ranked genre. ",
           "We also noticed that Adam Wingard is the director that is most ",
-          "frequently seen in this dataset. ")
+          "frequently seen in this dataset. "),
          h1("Analysis Discussion"),
         p("Interpreting the results and contextualizing the conclusions of",
           "a data analysis requires a familiarity with the dataset. In this",
@@ -236,7 +265,7 @@ ui <- navbarPage(
           "numerous times, is that due to gender biases in the way we produce",
           "and consume cinema, or is that simply an artist",
           "being rewarded with more opportunity as a result of their",
-          "previous success?"),
+          "previous success?")
         )
       )
   )
