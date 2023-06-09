@@ -3,11 +3,8 @@
 
 Authors: Alana Yudha-Wright, Brandon Bui, Gabriela Castaneda, Jonah Pierce
 
-<<<<<<< HEAD
 **https://gcasta11.shinyapps.io/final-project-ayudha00/**
-=======
-**Link: https://jrobertpierce.shinyapps.io/final-project-ayudha00/**
->>>>>>> fee599d1886e1e3c038289a8db4b2e1913d8dd6f
+
 
 Please create the necessary files for your multi-page Shiny app in this GitHub repository. Consult the Canvas assignment for more details. Be sure to publish your app on Shinyapps.io.
 
