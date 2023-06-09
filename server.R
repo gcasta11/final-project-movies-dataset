@@ -1,9 +1,35 @@
+<<<<<<< HEAD
+=======
+movies_df <- read.csv("Data/IMDB-Movie-Data")
+
+>>>>>>> fee599d1886e1e3c038289a8db4b2e1913d8dd6f
 library(dplyr)
 library(ggplot2)
 library(plotly)
 library(shiny)
 library(tidyverse)
 
+
+# Additional Analyses
+# What is the highest-rated movie in the dataset?
+highest_rated_movie <- movies_df %>% 
+  filter(Rating == max(Rating, na.rm = TRUE)) %>% 
+  pull(Title)
+
+# What year was the highest-rated movie released?
+max_rating_year <- movies_df %>% 
+  filter(Rating == max(Rating, na.rm = TRUE)) %>% 
+  pull(Year)
+
+# What is the lowest rated movie in the dataset?
+lowest_rated_movie <- movies_df %>% 
+  filter(Rating == min(Rating, na.rm = TRUE)) %>% 
+  pull(Title)
+
+# What year was the lowest-rated movie released?
+min_rating_year <- movies_df %>% 
+  filter(Rating == min(Rating, na.rm = TRUE)) %>% 
+  pull(Year)
 
 server <- function(input, output){
   movies_df <- read.csv("IMDB-Movie-Data.csv")
