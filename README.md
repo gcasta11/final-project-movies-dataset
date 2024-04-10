@@ -1,7 +1,7 @@
 # Exploring IMDb Hollywood Movies from 2006 to 2016
 ## INFO 201 "Foundational Skills for Data Science" — Winter 2023
 
-Authors: Alana Yudha-Wright, Brandon Bui, Gabriela Castaneda, Jonah Pierce
+By Gabriela Castaneda
 
 **https://gcasta11.shinyapps.io/final-project-ayudha00/**
 
